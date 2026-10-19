@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>경기본부 각종 리스트정보</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: #f4f6f8;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: #202124;
+  }
+  .wrap {
+    max-width: 950px;
+    margin: 0 auto;
+    padding: 20px 12px;
+  }
+  .card {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+  }
+  .header {
+    padding: 24px 20px 16px;
+    border-bottom: 1px solid #e5e7eb;
+    text-align: center;
+  }
+  .title {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 700;
+    color: #111827;
+  }
+  
+  /* 탭 버튼 스타일 */
+  .tab-wrap {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    padding: 16px 16px 0;
+    background: #ffffff;
+  }
+  .tab-btn {
+    flex: 1;
+    max-width: 180px;
+    padding: 12px 8px;
+    font-size: 14px;
+    font-weight: 700;
+    border: 1px solid #d1d5db;
+    border-bottom: none;
+    background: #f3f4f6;
+    color: #4b5563;
+    border-radius: 8px 8px 0 0;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+  }
+  .tab-btn.active {
+    background: #2563eb;
+    color: #ffffff;
+    border-color: #2563eb;
+  }
+
+  .search-wrap {
+    padding: 16px 20px;
+    background: #f9fafb;
+    border-top: 1px solid #e5e7eb;
+    border-bottom: 1px solid #e5e7eb;
+  }
+  .search-input {
+    width: 100%;
+    padding: 10px 14px;
+    font-size: 15px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .search-input:focus {
+    border-color: #2563eb;
+  }
+
+  .tab-content {
+    display: none;
+  }
+  .tab-content.active {
+    display: block;
+  }
+
+  .table-wrap {
+    overflow-x: auto;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+  }
+  th, td {
+    padding: 13px 12px;
+    border-bottom: 1px solid #e5e7eb;
+    font-size: 15px;
+  }
+  th {
+    background: #f3f4f6;
+    color: #374151;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  tr:hover {
+    background-color: #f9fafb;
+  }
+
+  .num { font-weight: 600; color: #6b7280; width: 10%; }
+  .name { font-weight: 700; color: #111827; }
+  .role { font-weight: 700; color: #1f2937; width: 30%; }
+  .location { color: #4b5563; }
+  
+  .phone-btn {
+    display: inline-block;
+    padding: 6px 12px;
+    color: #2563eb;
+    background-color: #eff6ff;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.2s;
+  }
+  .phone-btn:hover {
+    background-color: #dbeafe;
+  }
+  .note {
+    font-size: 13px;
+    color: #059669;
+    font-weight: 600;
+  }
+
+  /* 차량 관리 전용 스타일 */
+  .info-box {
+    padding: 20px;
+    background: #ffffff;
+  }
+  .section-card {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+  .section-title {
+    font-size: 16px;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 12px;
+    color: #111827;
+  }
+  .badge-done {
+    display: inline-block;
+    padding: 2px 8px;
+    background: #d1fae5;
+    color: #047857;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .badge-warn {
+    display: inline-block;
+    padding: 2px 8px;
+    background: #fef3c7;
+    color: #b45309;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .footer {
+    padding: 12px 20px;
+    color: #9ca3af;
+    font-size: 12px;
+    text-align: right;
+    background: #f9fafb;
+  }
+
+  @media (max-width: 640px) {
+    th, td { padding: 10px 6px; font-size: 14px; }
+    .phone-btn { padding: 4px 8px; font-size: 13px; }
+    .tab-btn { font-size: 12px; padding: 10px 2px; }
+    .info-box { padding: 12px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="card">
+<div class="header">
+<h1 class="title" id="pageTitle">📌 경기지역본부 연락처</h1>
+</div>
+<!-- 탭 선택 단추 (3개) -->
+<div class="tab-wrap">
+<button class="tab-btn active" onclick="switchTab('tab1', '📌 경기지역본부 연락처', this)">경기지역본부</button>
+<button class="tab-btn" onclick="switchTab('tab2', '📋 대체희망자 정보', this)">대체희망자</button>
+<button class="tab-btn" onclick="switchTab('tab3', '📢 방송차량 관리정보', this)">방송차량 관리</button>
+</div>
+<!-- 검색창 -->
+<div class="search-wrap" id="searchContainer">
+<input class="search-input" id="searchInput" onkeyup="filterTable()" placeholder="이름, 직책, 지역, 연락처 검색..." type="text"/>
+</div>
+<!-- 탭 1: 경기지역본부 연락처 -->
+<div class="tab-content active" id="tab1">
+<div class="table-wrap">
+<table class="data-table">
+<thead>
+<tr>
+<th>직책</th>
+<th>이름</th>
+<th>연락처</th>
+</tr>
+</thead>
+<tbody id="contactsBody"></tbody>
+</table>
+</div>
+</div>
+<!-- 탭 2: 대체희망자 정보 -->
+<div class="tab-content" id="tab2">
+<div class="table-wrap">
+<table class="data-table">
+<thead>
+<tr>
+<th>순번</th>
+<th>이름</th>
+<th>거주지</th>
+<th>연락처</th>
+<th>비고</th>
+</tr>
+</thead>
+<tbody id="substitutesBody"></tbody>
+</table>
+</div>
+</div>
+<!-- 탭 3: 방송차량 관리정보 -->
+<div class="tab-content" id="tab3">
+<div class="info-box">
+<!-- 자동차보험 정보 -->
+<div class="section-card"><h3 class="section-title">🛡️ 자동차 보험 안내 (4대 동일)</h3><p><strong>공통 만기일:</strong> <span id="insuranceExpiry"></span></p><p><strong>현대해상 고객센터:</strong> <a class="phone-btn" id="insurancePhone"></a></p></div>
+<!-- 엔진오일 교환 일정 -->
+<div class="section-card">
+<h3 class="section-title">🔧 2027년 엔진오일 교환 일정</h3>
+<div class="table-wrap">
+<table style="text-align: left;">
+<thead>
+<tr>
+<th>일정</th>
+<th>담당 지부</th>
+<th>차종 (차량번호)</th>
+</tr>
+</thead>
+<tbody id="oilBody"></tbody>
+</table>
+</div>
+</div>
+<!-- 차량 정기검사 현황 -->
+<div class="section-card" style="margin-bottom: 0;">
+<h3 class="section-title">🔍 차량 정기검사 현황</h3>
+<div class="table-wrap">
+<table style="text-align: left;">
+<thead>
+<tr>
+<th>지부 / 차량번호</th>
+<th>상태</th>
+<th>비고</th>
+</tr>
+</thead>
+<tbody id="inspectionBody"></tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="footer">※ 번호 및 전화 연결 버튼을 누르면 바로 전화 연결이 가능합니다.</div>
+</div>
+</div>
+
+<script>
+let db = {contacts:[],substitutes:[],vehicles:{insurance:{},oil_changes:[],inspections:[]}};
+const esc = x => String(x ?? '').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const phone = x => `<a class="phone-btn" href="tel:${String(x).replace(/[^0-9+]/g,'')}">${esc(x)}</a>`;
+const td = (s,cls='') => `<td${cls?` class="${cls}"`:''}>${s}</td>`;
+function render(){
+ document.getElementById('contactsBody').innerHTML=db.contacts.map(x=>`<tr>${td(esc(x.role),'role')}${td(esc(x.name),'name')}${td(phone(x.phone))}</tr>`).join('');
+ document.getElementById('substitutesBody').innerHTML=db.substitutes.map(x=>`<tr>${td(esc(x.order),'num')}${td(esc(x.name),'name')}${td(esc(x.location),'location')}${td(phone(x.phone))}${td(esc(x.note),'note')}</tr>`).join('');
+ const v=db.vehicles;
+ document.getElementById('insuranceExpiry').textContent=v.insurance.expiry||'';
+ const anchor=document.getElementById('insurancePhone');anchor.textContent=v.insurance.phone||'';anchor.href='tel:'+String(v.insurance.phone||'').replace(/[^0-9+]/g,'');
+ document.getElementById('oilBody').innerHTML=v.oil_changes.map(x=>`<tr>${td(esc(x.date))}${td(esc(x.branch))}${td(esc(x.vehicle))}</tr>`).join('');
+ document.getElementById('inspectionBody').innerHTML=v.inspections.map(x=>`<tr>${td(esc(x.vehicle))}${td(`<span class="${x.status==='완료'?'badge-done':'badge-warn'}">${esc(x.status)}</span>`)}${td(esc(x.note))}</tr>`).join('');
+ filterTable();
+}
+function switchTab(tabId, titleText, button){
+ document.querySelectorAll('.tab-content').forEach(x=>x.classList.remove('active'));
+ document.querySelectorAll('.tab-btn').forEach(x=>x.classList.remove('active'));
+ document.getElementById(tabId).classList.add('active');
+ button.classList.add('active');
+ document.getElementById('pageTitle').textContent=titleText;
+ document.getElementById('searchContainer').style.display=tabId==='tab3'?'none':'block';
+ document.getElementById('searchInput').value='';filterTable();
+}
+function filterTable(){
+ const q=document.getElementById('searchInput').value.trim().toLowerCase();
+ const active=document.querySelector('.tab-content.active');
+ if(!active)return;
+ active.querySelectorAll('tbody tr').forEach(tr=>{tr.style.display=tr.textContent.toLowerCase().includes(q)?'':'none'});
+}
+fetch('./data.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('HTTP '+r.status);return r.json()}).then(j=>{db=j;render()}).catch(err=>{document.getElementById('pageTitle').textContent='데이터를 불러오지 못했습니다';console.error(err)});
+</script></body>
+</html>
