@@ -137,16 +137,23 @@
     },
     {
       "order": 5,
-      "name": "서두석",
-      "location": "동탄",
-      "phone": "010-3776-3725",
-      "note": "본조 사무국장님 전담 대체자"
-    },
-    {
-      "order": 6,
       "name": "이경재",
       "location": "안양",
       "phone": "010-9007-1427",
+      "note": ""
+    },
+    {
+      "order": 6,
+      "name": "윤소담",
+      "location": "",
+      "phone": "",
+      "note": ""
+    },
+    {
+      "order": 7,
+      "name": "오세훈",
+      "location": "",
+      "phone": "",
       "note": ""
     }
   ],
