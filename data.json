@@ -109,41 +109,34 @@
   "substitutes": [
     {
       "order": 1,
-      "name": "이상건",
-      "location": "성남",
-      "phone": "010-7556-6400",
-      "note": ""
-    },
-    {
-      "order": 2,
       "name": "조진명",
       "location": "수원시 오목천동",
       "phone": "010-7928-6589",
       "note": ""
     },
     {
-      "order": 3,
+      "order": 2,
       "name": "임대현",
       "location": "오산",
       "phone": "010-5774-0555",
       "note": ""
     },
     {
-      "order": 4,
+      "order": 3,
       "name": "이재성",
       "location": "광주",
       "phone": "010-3128-2314",
       "note": ""
     },
     {
-      "order": 5,
+      "order": 4,
       "name": "이경재",
       "location": "안양",
       "phone": "010-9007-1427",
       "note": ""
     },
     {
-      "order": 6,
+      "order": 5,
       "name": "오세훈",
       "location": "화성시 반월동",
       "phone": "010-3885-6571",
