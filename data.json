@@ -116,34 +116,27 @@
     },
     {
       "order": 2,
-      "name": "임대현",
-      "location": "오산",
-      "phone": "010-5774-0555",
-      "note": ""
-    },
-    {
-      "order": 3,
       "name": "이재성",
       "location": "광주",
       "phone": "010-3128-2314",
       "note": ""
     },
     {
-      "order": 4,
+      "order": 3,
       "name": "이경재",
       "location": "안양",
       "phone": "010-9007-1427",
       "note": ""
     },
     {
-      "order": 5,
+      "order": 4,
       "name": "김안섭",
       "location": "화성시 봉담읍",
       "phone": "010-5501-6916",
       "note": ""
     },
     {
-      "order": 6,
+      "order": 5,
       "name": "김웅수",
       "location": "오산시",
       "phone": "010-4504-8736",
